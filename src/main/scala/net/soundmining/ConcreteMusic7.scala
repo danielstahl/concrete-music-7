@@ -127,15 +127,15 @@ object ConcreteMusic7 {
     ))
 
     val leftChestHitPan =
-      (() => staticControl(-0.8), () => staticControl(-0.7), () => staticControl(-0.6))
+      (() => staticControl(-0.6), () => staticControl(-0.5), () => staticControl(-0.4))
     val rightChestHitPan =
-      (() => staticControl(0.8), () => staticControl(0.7), () => staticControl(0.6))
+      (() => staticControl(0.6), () => staticControl(0.5), () => staticControl(0.4))
 
     val leftToRightChestHitPan =
-      (() => lineControl(-0.8, 0.8), () => lineControl(-0.7, 0.7), () => lineControl(-0.6, 0.6))
+      (() => lineControl(-0.6, 0.6), () => lineControl(-0.5, 0.5), () => lineControl(-0.4, 0.4))
 
     val rightToLeftChestHitPan =
-      (() => lineControl(0.8, -0.8), () => lineControl(0.7, -0.7), () => lineControl(0.6, -0.6))
+      (() => lineControl(0.6, -0.6), () => lineControl(0.5, -0.5), () => lineControl(0.4, -0.4))
 
     val chestHitPans = Seq(
       leftChestHitPan,
@@ -154,18 +154,18 @@ object ConcreteMusic7 {
     def playChestHit(startTime: Double, pan: (() => ControlInstrument, () => ControlInstrument, () => ControlInstrument)): Unit = {
       soundPlays.mono(CHEST_HIT)
         .playMono(1.0, 1.0)
-        .lowPass(300)
-        .splay(staticControl(0.2), pan._1())
+        .lowPass(2000)
+        .splay(staticControl(0.4), pan._1())
         .play(startTime, 18)
 
       soundPlays.mono(CHEST_HIT)
         .playMono(1.01, 1.0)
-        .highPass(12000)
-        .splay(staticControl(0.2), pan._2())
+        .highPass(6000)
+        .splay(staticControl(0.4), pan._2())
         .play(startTime, 20)
 
       soundPlays.mono(CHEST_HIT)
-        .playMono(0.99, 2.0)
+        .playMono(0.99, 3.0)
         .sine(36, 0.8, 0.8)
         .splay(staticControl(0.2), pan._3())
         .play(startTime, 22)
